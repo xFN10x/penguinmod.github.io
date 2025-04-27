@@ -59,6 +59,7 @@ import turbowarpIcon from './penguinmod/extensions/turbowarp_icon.svg';
 import penguinmodLibraryExtensionIcon from './penguinmod/library.svg';
 import sharkpoolGalleryIcon from './penguinmod/sharkpool-library.svg';
 
+import ExtForgeIcon from './penguinmod/extforge.svg';
 import turboBuilderIcon from './penguinmod/turbobuilder.png';
 import turboBuilderDevIcon from './penguinmod/turbobuilder-dev.png';
 
@@ -1108,8 +1109,19 @@ const menuItems = [
         credits: 'Listed in the site',
         tags: ['library'],
         featured: true
+    },{
+        // not really an extension, but it's easiest to present it as one
+        name: 'ExtForge',
+        href: 'https://jwklong.github.io/extforge',
+        extensionId: 'special_extforge',
+        iconURL: ExtForgeIcon,
+        description: 'Create extensions with a block-based UI.',
+        extDeveloper: 'jwklong',
+        isNew: true,
+        tags: ['extcreate'],
+        featured: true
     },
-    {
+    /*{
         // not really an extension, but it's easiest to present it as one
         name: 'TurboBuilder',
         href: 'https://turbobuilder.vercel.app/',
@@ -1131,7 +1143,7 @@ const menuItems = [
         credits: 'Started by JeremyGamer13, continued by jwklong',
         tags: ['extcreate'],
         featured: true
-    },
+    },*/
     {
         // not really an extension, but it's easiest to present it as one
         name: (
