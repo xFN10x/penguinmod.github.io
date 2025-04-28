@@ -383,6 +383,7 @@ const SoundEditor = props => (
             <div className={styles.advancedInfo}>
                 {props.sampleRate}
                 {'Hz '}
+                {`${String(props.dataFormat).toUpperCase()} `}
                 {props.isStereo ? (
                     <FormattedMessage
                         defaultMessage="Stereo"
@@ -399,13 +400,30 @@ const SoundEditor = props => (
                 {` (${formatSoundSize(props.size)})`}
             </div>
         </div>
-        {/* TODO: don't know whether this should be > or >=. Using >= for now to be safe */}
         {props.size >= SOUND_BYTE_LIMIT && (
             <div className={classNames(styles.alert, styles.tooLarge)}>
                 <FormattedMessage
                     defaultMessage="This sound could be too large to upload to PenguinMod."
-                    description="Message that appears when a sound exceeds the Scratch sound size limit."
-                    id="tw.tooLarge"
+                    description="Message that appears when a sound exceeds the PenguinMod sound size limit."
+                    id="pm.tooLarge"
+                />
+            </div>
+        )}
+        {(props.dataFormat === "mp3" || props.dataFormat === "ogg" || props.dataFormat === "flac") && (
+            <div className={classNames(styles.alert, styles.stereo)}>
+                <FormattedMessage
+                    defaultMessage="Editing this sound will irreversibly convert it to a much larger, WAV format sound."
+                    description="Message that appears when editing an mp3, ogg or flac sound."
+                    id="pm.formatAlert"
+                />
+            </div>
+        )}
+        {(props.dataFormat === "ogg") && (
+            <div className={classNames(styles.alert, styles.tooLarge)}>
+                <FormattedMessage
+                    defaultMessage="Users on iOS and MacOS will need to update their browser or device to hear any OGG sounds."
+                    description="Message that appears when editing an ogg sound."
+                    id="pm.oggSafariAlert"
                 />
             </div>
         )}
@@ -424,6 +442,7 @@ const SoundEditor = props => (
 SoundEditor.propTypes = {
     isStereo: PropTypes.bool.isRequired,
     duration: PropTypes.number.isRequired,
+    dataFormat: PropTypes.number.isRequired,
     size: PropTypes.bool.isRequired,
     sampleRate: PropTypes.number.isRequired,
     canPaste: PropTypes.bool.isRequired,
