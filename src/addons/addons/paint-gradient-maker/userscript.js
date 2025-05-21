@@ -250,6 +250,7 @@ export default async function () {
                     break;
                 default: return;
             }
+            if (!item) return;
             const bounds = item.bounds;
             let origin, destination;
             if (modalStorage.type === "Radial") {
