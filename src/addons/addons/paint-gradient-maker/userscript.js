@@ -131,7 +131,8 @@ export default async function () {
         // create draggables
         const newStops = gradient.stops.map((s, i) => {
             // "offset" will be undefined when using Scratch gradients, which dont have set-stops
-            return createDraggable(s.color.toCSS(true), s.offset ? s.offset * 100 : i * 100)
+            const alpha = Math.round(s.color.alpha * 255).toString(16).padStart(2, "0");
+            return createDraggable(s.color.toCSS(true) + alpha, s.offset ? s.offset * 100 : i * 100)
         });
         draggableDiv.append(...newStops);
 
@@ -304,7 +305,10 @@ export default async function () {
                     settings: {
                         type: gradient.radial ? "Radial" : "Linear",
                         dir: position2Angle(destination, origin),
-                        parts: gradient.stops.map(s => ({ c: s.color.toCSS(true), p: s.offset * 100 }))
+                        parts: gradient.stops.map(s => {
+                            const alpha = Math.round(s.color.alpha * 255).toString(16).padStart(2, "0");
+                            return { c: s.color.toCSS(true) + alpha, p: s.offset * 100 };
+                        })
                     }
                 };
             } else if (!item.fillColor) fillSwatch.style.background = "#fff";
@@ -315,7 +319,8 @@ export default async function () {
         const index = modalStorage.parts.length;
         const rngPos = optP ?? Math.floor(Math.random() * 100);
         const rngHex = optC ?? `#${Math.floor(Math.random() * Math.pow(2, 24)).toString(16).padStart(6, "0")}`;
-
+        const opacity = optC ? optC.length === 9 ? parseInt(optC.slice(7, 9), 16) / 255 : 1 : 1;
+  
         const draggable = document.createElement("div");
         draggable.id = index;
         draggable.classList.add("pointer");
@@ -334,26 +339,59 @@ export default async function () {
         nub.appendChild(polygon);
 
         const color = document.createElement("div");
-        color.setAttribute("style", `width: 25px; height: 25px; border-radius: 4px; background: #fff; display: flex; justify-content: center; align-items: center;`);
+        color.setAttribute("style", `width: 25px; height: 25px; border-radius: 4px; background: #fff; display: flex; justify-content: center; align-items: center; flex-direction: column;`);
 
         const colorContainer = document.createElement("div");
-        colorContainer.setAttribute("style", `width: 16px; height: 16px; border-radius: 5px; background: ${rngHex}; border: solid 2px rgba(0,0,0,.2);`);
+        colorContainer.setAttribute("style", `width: 16px; height: 16px; border-radius: 5px; background: ${rngHex}; border: solid 2px rgba(0,0,0,.2); opacity: ${opacity}; margin-bottom: 2px;`);
+
         const colorInput = document.createElement("input");
         colorInput.setAttribute("type", "color");
         colorInput.setAttribute("style", `opacity: 0; position: absolute; pointer-events: none;`);
 
+        const opacityInput = document.createElement("input");
+        opacityInput.setAttribute("type", "number");
+        opacityInput.setAttribute("min", "0");
+        opacityInput.setAttribute("max", "100");
+        opacityInput.value = opacity * 100;
+        opacityInput.setAttribute("style", `visibility: hidden; background: #fff; border: none; color: #000; text-align: center; position: absolute; pointer-events: auto; width: 45px; height: 25px; padding: 0; margin: 0; border-radius: 0 5px 5px 0; left: 22px;`);
+
+        // Color picker handler
         colorContainer.addEventListener("click", (e) => {
+            opacityInput.style.visibility = "visible";
             colorInput.click();
             e.stopPropagation();
         });
+        draggable.addEventListener("mouseleave", (e) => {
+            opacityInput.style.visibility = "hidden";
+            e.stopPropagation();
+        });
+
         colorInput.addEventListener("input", (e) => {
             modalStorage.parts[index].c = e.target.value;
             colorContainer.style.background = e.target.value;
             updateDisplay();
         });
 
+        // Opacity slider handler
+        opacityInput.addEventListener("click", (e) => {
+            opacityInput.focus();
+            e.stopPropagation();
+        });
+        opacityInput.addEventListener("input", (e) => {
+            const newOpacity = Math.min(100, Math.max(0, e.target.value));
+            e.target.value = newOpacity;
+            colorContainer.style.opacity = newOpacity / 100;
+
+            const alpha = Math.round(newOpacity * 2.55).toString(16).padStart(2, "0");
+            const hex = modalStorage.parts[index].c;
+            modalStorage.parts[index].c = hex.substring(0, 7) + alpha;
+            updateDisplay();
+        });
+
         draggable.addEventListener("mousedown", (e) => {
             e.preventDefault();
+            if (e.target === opacityInput) return;
+
             modalStorage.selectedPointer = draggable;
             const container = draggable.parentElement;
             const containerRect = container.getBoundingClientRect();
@@ -375,7 +413,7 @@ export default async function () {
             document.addEventListener("mouseup", onMouseUp);
         });
 
-        color.append(colorContainer, colorInput);
+        color.append(colorContainer, colorInput, opacityInput);
         draggable.append(nub, color);
         modalStorage.parts.push({ c: rngHex, p: rngPos });
         modalStorage.selectedPointer = draggable;
