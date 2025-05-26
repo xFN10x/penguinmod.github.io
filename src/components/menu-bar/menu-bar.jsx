@@ -85,6 +85,8 @@ import sharedMessages from '../../lib/shared-messages';
 import SeeInsideButton from './tw-see-inside.jsx';
 import { notScratchDesktop } from '../../lib/isScratchDesktop.js';
 
+import { consoleLogs } from '../../lib/pm-log-capture.js';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -420,6 +422,18 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+    handleClickDownloadLogs() {
+        const str = JSON.stringify(consoleLogs);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        document.body.append(a);
+        const url = window.URL.createObjectURL(new Blob([str]));
+        a.href = url;
+        a.download = 'pm-log-trace.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+    }
     render() {
         const saveNowMessage = (
             <FormattedMessage
@@ -700,6 +714,11 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         </MenuSection>
                                     )}
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickDownloadLogs}>
+                                            {'Download Logs'}
+                                        </MenuItem>
+                                    </MenuSection>
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRestorePoints}>
                                             <FormattedMessage
