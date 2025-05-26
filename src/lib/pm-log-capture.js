@@ -47,7 +47,7 @@ const consoleLogs = [];
  */
 const push = (type, message, trace) => {
     // try to keep logs temporaly relevant, as long lengths of run time could make this array over flow
-    while (Date.now() - consoleLogs[0]?.time > 60 * 60 * 1000)
+    while (consoleLogs.length > 10000)
         consoleLogs.shift();
     consoleLogs.push({
         time: Date.now(),
