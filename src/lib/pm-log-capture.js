@@ -146,12 +146,12 @@ const parseStack = (stack, url, line, column) => {
 window.addEventListener('error', e =>
     push('error', e.message, parseStack(e.error.stack, e.filename, e.lineno, e.colno)));
 window.addEventListener('unhandledrejection', e => push('promiseError', e.reason, []));
-const { log, warn, error, debug, info } = window.console;
-for (const item of [log, warn, error, debug, info]) {
-    window.console[item.name] = (...args) => {
+for (const name of ['log', 'warn', 'error', 'debug', 'info']) {
+    const item = window.console[name];
+    window.console[name] = (...args) => {
         let stack = [];
         if (browserHasStack) stack = parseStack(new Error().stack);
-        push(item.name, args, stack);
+        push(name, args, stack);
         item(...args);
     };
 }
