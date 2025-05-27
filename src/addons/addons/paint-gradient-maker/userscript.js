@@ -15,7 +15,8 @@ export default async function () {
         ...(isPM ? ["ROUNDED_RECT", "TRIANGLE", "SUSSY", "ARROW"] : [])
     ]);
 
-    let selectedClassName, unselectedClassName;
+    let selectedClassName, unselectedClassName, customBtn;
+    let observerUsed = false;
     let modalStorage = {};
 
     /* Internal Utils */
@@ -574,27 +575,39 @@ export default async function () {
     }
 
     function startListenerWorker() {
+        let lastMode, lastSelected, lastModals;
         ReduxStore.subscribe(() => {
             const paint = ReduxStore.getState().scratchPaint;
             if (!paint || paint?.format === undefined || paint?.format === null) return;
+            const { mode, selectedItems, modals } = paint;
 
             // no bitmap support :(
             if (paint.format.startsWith("BITMAP")) {
-                const oldCustomBtn = document.getElementById(customID);
-                if (oldCustomBtn) oldCustomBtn.remove();
+                if (customBtn) {
+                    customBtn.remove();
+                    customBtn = undefined;
+                }
                 return;
             }
 
-            // decode potential custom gradients
-            if (paint.selectedItems?.length) showSelectedGrad(paint.selectedItems[0]);
-
             // run relative tool events
-            if (paint.mode === "FILL") handleFillEvent();
-            else if (paperLinkModes.has(paint.mode)) handleShapeModeEvent(paint.mode);
-            else modalStorage._gradCache = undefined;
+            if (mode === "FILL") handleFillEvent();
+            else if (paperLinkModes.has(mode)) handleShapeModeEvent(mode);
+
+            const idChain = selectedItems.map((e) => e.id).join(".");
+            const modalChain = `${modals.fillColor}${modals.strokeColor}`;
+            if (mode === lastMode && idChain === lastSelected && modalChain === lastModals) return;
+            lastMode = mode;
+            lastSelected = idChain;
+            lastModals = modalChain;
+
+            // decode potential custom gradients
+            if (selectedItems?.length) showSelectedGrad(selectedItems[0]);
+            else if (mode === "SELECT" || mode === "RESHAPE") modalStorage._gradCache = undefined;
 
             // add custom modal
-            if (!paint.modals.strokeColor && !paint.modals.fillColor) return;
+            if (!modals.strokeColor && !modals.fillColor) return;
+            if (observerUsed) return;
             const observer = new MutationObserver(() => {
                 const gradRow = document.querySelector(`div[class^="color-picker_gradient-picker-row_"]`);
                 if (!gradRow || gradRow.lastElementChild.id === customID) return;
@@ -603,7 +616,7 @@ export default async function () {
                 if (!selectedClassName) initGradSelectClasses(gradRow);
                 const children = Array.from(gradRow.children);
 
-                const customBtn = children[0].cloneNode(true);
+                customBtn = children[0].cloneNode(true);
                 customBtn.src = getButtonURI("select");
                 customBtn.id = customID;
                 customBtn.setAttribute("class", unselectedClassName);
@@ -619,10 +632,12 @@ export default async function () {
                     }
                 });
 
+                observerUsed = false;
                 observer.disconnect();
             });
 
             observer.observe(document.body, { childList: true, subtree: true });
+            observerUsed = true;
         });
     }
 
