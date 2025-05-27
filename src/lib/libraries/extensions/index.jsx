@@ -386,6 +386,15 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Looks Expanded',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Looks-Expanded.js',
+        iconURL: 'https://sharkpools-extensions.vercel.app/extension-thumbs/Looks-Expanded.svg',
+        tags: ['penguinmod', 'categoryexpansion', 'graphics'],
+        description: 'Expansion of the Looks Category.',
+        extDeveloper: 'SharkPool, CST1229',
+        featured: true
+    },
+    {
         name: 'Motion Expansion',
         extensionId: 'pmMotionExpansion',
         iconURL: pmMotionExpansionExtensionIcon,
