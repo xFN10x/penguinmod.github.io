@@ -1407,12 +1407,13 @@ if (IsLocal || IsLiveTests) {
         {
             name: '3D',
             extensionId: 'jg3d',
-            iconURL: jg3dExtensionIcon,
+            iconURL: defaultExtensionIcon,
             tags: ['penguinmod', '3d'],
             customInsetColor: '#B200FF',
             insetIconURL: jg3dInsetExtensionIcon,
-            description: 'Use the magic of 3D to spice up your project.',
-            featured: true
+            description: 'Do not use for real projects. Not recommended, unstable, and will be rewritten/remade entirely at a later date. In development.',
+            featured: true,
+            extensionWarningOnImport: true
         },
         {
             name: '3D Physics',
@@ -1431,8 +1432,9 @@ if (IsLocal || IsLiveTests) {
             tags: ['penguinmod', 'hardware', '3d'],
             customInsetColor: '#B200FF',
             insetIconURL: jg3dVrInsetExtensionIcon,
-            description: 'In development. May break compatibility. Allow players to really jump into your world!',
-            featured: true
+            description: 'Do not use for real projects. Not recommended, unstable, and will be rewritten/remade entirely at a later date. In development. May break compatibility. Allow players to really jump into your world!',
+            featured: true,
+            extensionWarningOnImport: true
         },
         {
             name: 'Interfaces',
@@ -1498,7 +1500,8 @@ if (IsLocal || IsLiveTests) {
             tags: ['penguinmod', 'hardware'],
             description: 'In development.',
             credits: 'Vadik1',
-            featured: true
+            featured: true,
+            extensionWarningOnImport: true
         }
     ];
     extras.forEach(ext => {

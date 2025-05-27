@@ -461,6 +461,7 @@ class LibraryComponent extends React.Component {
                                 soundType={dataItem.soundType}
                                 soundLength={dataItem.soundLength}
                                 incompatibleWithScratch={dataItem.incompatibleWithScratch}
+                                extensionWarningOnImport={dataItem.extensionWarningOnImport}
                                 insetIconURL={dataItem.insetIconURL}
                                 internetConnectionRequired={dataItem.internetConnectionRequired}
                                 isPlaying={this.state.playingItem === index}
