@@ -486,9 +486,28 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
-    ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
+    ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId, inputList) {
         const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
-        return monitoredBlock ? monitoredBlock.isMonitored : false;
+        if (!monitoredBlock)
+            return false;
+
+        const { opcode, fields } = monitoredBlock;
+
+        if (opcode == "data_variable" || opcode == "data_listcontents")
+            return monitoredBlock ? monitoredBlock.isMonitored : false;
+
+        const parsedFields = inputList[0].fieldRow
+            .filter(({ name }) => name in fields)
+            .map(field => {
+                if (field.variable_) return field.variable_.name;
+                return field.name === "CURRENTMENU" ? field.value_.toLowerCase() : field.value_;
+            }).join("_");
+
+        const newBlockId = blockId + (parsedFields.length ? "_" : "") + parsedFields;
+
+        const newMonitoredBlock = vm.runtime.monitorBlocks._blocks[newBlockId];
+
+        return newMonitoredBlock ? newMonitoredBlock.isMonitored : false;
     };
 
     ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
