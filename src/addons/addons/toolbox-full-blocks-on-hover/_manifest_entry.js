@@ -9,6 +9,7 @@ const manifest = {
         "recommended"
     ],
     "enabledByDefault": false,
+    "dynamicEnable": true,
     "dynamicDisable": true,
     "userstyles": [
         {

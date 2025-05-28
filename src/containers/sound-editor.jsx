@@ -53,7 +53,7 @@ class SoundEditor extends React.Component {
         ]);
         this.state = {
             copyBuffer: null,
-            chunkLevels: computeChunkedRMS(this.props.samples),
+            chunkLevels: computeChunkedRMS(this.props.samples, this.props.waveformChunkSize),
             playhead: null, // null is not playing, [0 -> 1] is playing percent
             trimStart: null,
             trimEnd: null
@@ -70,6 +70,11 @@ class SoundEditor extends React.Component {
         document.addEventListener('keydown', this.handleKeyPress);
     }
     componentWillReceiveProps(newProps) {
+        if (newProps.waveformChunkSize !== this.props.waveformChunkSize) {
+            this.setState({
+                chunkLevels: computeChunkedRMS(newProps.samples, newProps.waveformChunkSize),
+            });
+        }
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
             this.redoStack = [];
             this.undoStack = [];
@@ -141,7 +146,7 @@ class SoundEditor extends React.Component {
         this.audioBufferPlayer.stop();
         this.audioBufferPlayer = new AudioBufferPlayer(samples, sampleRate);
         this.setState({
-            chunkLevels: computeChunkedRMS(samples),
+            chunkLevels: computeChunkedRMS(samples, this.props.waveformChunkSize),
             playhead: null
         });
     }
@@ -761,7 +766,8 @@ SoundEditor.propTypes = {
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
     soundIndex: PropTypes.number,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    waveformChunkSize: PropTypes.number,
 };
 
 const mapStateToProps = (state, { soundIndex }) => {
@@ -780,7 +786,8 @@ const mapStateToProps = (state, { soundIndex }) => {
         samples: audioBuffer.getChannelData(0),
         isFullScreen: state.scratchGui.mode.isFullScreen,
         name: sound.name,
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        waveformChunkSize: state.scratchGui.addonUtil.soundEditorWaveformChunkSize,
     };
 };
 

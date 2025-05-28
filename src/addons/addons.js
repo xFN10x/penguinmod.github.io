@@ -67,18 +67,19 @@ const addons = [
     'tw-straighten-comments',
     'tw-remove-backpack',
     'tw-remove-feedback',
-    'tw-disable-cloud-variables'
-];
-
-const newAddons = [
+    'tw-disable-cloud-variables',
     'vol-slider',
     'number-pad',
     'rename-broadcasts',
     'sprite-properties',
     'paint-snap',
-    "editor-block-chomping",
+    "editor-block-chomping"
+];
+
+const newAddons = [
     "paint-gradient-maker",
-    "toolbox-full-blocks-on-hover"
+    "toolbox-full-blocks-on-hover",
+    "waveform-chunk-size"
 ];
 
 // eslint-disable-next-line import/no-commonjs

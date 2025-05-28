@@ -14,6 +14,7 @@ import _drag_drop from "../addons/drag-drop/_manifest_entry.js";
 import _debugger from "../addons/debugger/_manifest_entry.js";
 import _mute_project from "../addons/mute-project/_manifest_entry.js";
 import _vol_slider from "../addons/vol-slider/_manifest_entry.js";
+import _waveform_chunk_size from "../addons/waveform-chunk-size/_manifest_entry.js";
 import _clones from "../addons/clones/_manifest_entry.js";
 import _mouse_pos from "../addons/mouse-pos/_manifest_entry.js";
 import _color_picker from "../addons/color-picker/_manifest_entry.js";
@@ -138,4 +139,5 @@ export default {
   "tw-remove-backpack": _tw_remove_backpack,
   "tw-disable-cloud-variables": _tw_disable_cloud_variables,
   "vol-slider": _vol_slider,
+  "waveform-chunk-size": _waveform_chunk_size,
 };
