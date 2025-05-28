@@ -700,6 +700,24 @@ class MenuBar extends React.Component {
                                             </React.Fragment>
                                         )}</SB3Downloader>
                                     </MenuSection>
+                                    {this.props.isDirectoryPickerSupported && (
+                                        <MenuSection>
+                                            <MenuItem
+                                                onClick={this.props.onStartFolderUpload}
+                                            >
+                                                {"Load from a folder"}
+                                            </MenuItem>
+                                            <SB3Downloader>{(_className, downloadProject, extended) => (
+                                                <React.Fragment>
+                                                    <MenuItem
+                                                        onClick={this.getSaveToComputerHandler(extended.saveAsFolder)}
+                                                    >
+                                                        {"Export project to folder"}
+                                                    </MenuItem>
+                                                </React.Fragment>
+                                            )}</SB3Downloader>
+                                        </MenuSection>
+                                    )}
                                     {this.props.onClickPackager && (
                                         <MenuSection>
                                             <MenuItem
@@ -715,17 +733,17 @@ class MenuBar extends React.Component {
                                         </MenuSection>
                                     )}
                                     <MenuSection>
-                                        <MenuItem onClick={this.handleClickDownloadLogs}>
-                                            {'Download Logs'}
-                                        </MenuItem>
-                                    </MenuSection>
-                                    <MenuSection>
                                         <MenuItem onClick={this.handleClickRestorePoints}>
                                             <FormattedMessage
                                                 defaultMessage="Restore points"
                                                 description="Menu bar item to manage restore points"
                                                 id="tw.menuBar.restorePoints"
                                             />
+                                        </MenuItem>
+                                    </MenuSection>
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickDownloadLogs}>
+                                            {'Download Logs'}
                                         </MenuItem>
                                     </MenuSection>
                                 </MenuBarMenu>
@@ -997,6 +1015,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     handleSaveProject: PropTypes.func,
     intl: intlShape,
+    isDirectoryPickerSupported: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -1047,6 +1066,7 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+    onStartFolderUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     projectId: PropTypes.string,
     projectTitle: PropTypes.string,
