@@ -87,6 +87,3 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
 
     return {id, label, category, value, isHTML};
 }
-
-
-value.constructor?.name === "Object" || value.constructor?.name === "Array") {
