@@ -2,6 +2,17 @@ import OpcodeLabels from './opcode-labels.js';
 
 const isUndefined = a => typeof a === 'undefined';
 
+const circularReplacer = () => {
+    const stack = new Set();
+    return function replacer(_, value) {
+        if (typeof value === "object" && value !== null) {
+            if (stack.has(value)) return Array.isArray(value) ? "[...]" : "{...}";
+            stack.add(value);
+        }
+        return value;
+    };
+};
+
 /**
  * Convert monitors from VM format to what the GUI needs to render.
  * - Convert opcode to a label and a category
@@ -46,20 +57,37 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
                 value[i] = item.toString();
             }
             if (typeof item === 'object' &&
-                typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
-                value[i].isHTML = true;
+                // check if this is a pure object or custom display
+                if (
+                    value.constructor?.name === "Object" || value.constructor?.name === "Array"
+                ) {
+                    value = JSON.stringify(value, circularReplacer);
+                } else {
+                    typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
+                    value[i].isHTML = true;
+                }
             }
         }
     }
 
     let isHTML = false;
     if (typeof value === 'object' &&
-        typeof (value.toMonitorContent || value.toReporterContent) === 'function') {
-        value = value.toMonitorContent
-            ? value.toMonitorContent()
-            : value.toReporterContent();
-        isHTML = true;
+        typeof (value.toMonitorContent || value.toReporterContent) === 'function'
+    ) {
+        // check if this is a pure object or custom display
+        if (
+            value.constructor?.name === "Object" || value.constructor?.name === "Array"
+        ) {
+            value = JSON.stringify(value, circularReplacer);
+        } else {
+            value = value.toMonitorContent
+              ? value.toMonitorContent() : value.toReporterContent();
+            isHTML = true;
+        }
     }
 
     return {id, label, category, value, isHTML};
 }
+
+
+value.constructor?.name === "Object" || value.constructor?.name === "Array") {
