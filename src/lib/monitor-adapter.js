@@ -60,30 +60,24 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
             }
             if (typeof item === 'object') {
                 // check if this is a pure object or custom display
-                if (
-                    item.constructor?.name === "Object" || item.constructor?.name === "Array"
-                ) {
-                    value[i] = JSON.stringify(item, circularReplacer);
-                } else if (typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
+                if (typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
                     value[i].isHTML = true;
+                } else {
+                    value[i] = JSON.stringify(item, circularReplacer);
                 }
             }
         }
     }
 
     let isHTML = false;
-    if (typeof value === 'object' &&
-        typeof (value.toMonitorContent || value.toReporterContent) === 'function'
-    ) {
+    if (typeof value === 'object') {
         // check if this is a pure object or custom display
-        if (
-            value.constructor?.name === "Object" || value.constructor?.name === "Array"
-        ) {
-            value = JSON.stringify(value, circularReplacer);
-        } else {
+        if (typeof (value.toMonitorContent || value.toReporterContent) === 'function') {
             value = value.toMonitorContent
               ? value.toMonitorContent() : value.toReporterContent();
             isHTML = true;
+        } else {
+            value = JSON.stringify(value, circularReplacer);
         }
     }
 
