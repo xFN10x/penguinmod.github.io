@@ -302,7 +302,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 }
                 assetPromise = progressMonitor.fetchWithProgress(projectUrl)
                     .then(r => {
-                        if (this.props.vm.runtime.renderer.setPrivateSkinAccess)
+                        if (this.props.vm.runtime.renderer?.setPrivateSkinAccess)
                             this.props.vm.runtime.renderer.setPrivateSkinAccess(false);
                         if (!r.ok) {
                             throw new Error(`Request returned status ${r.status}`);
@@ -319,7 +319,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     projectUrl = `https://projects.penguinmod.com/api/v1/projects/getprojectwrapper?safe=true&projectId=${projectId}`
                     assetPromise = progressMonitor.fetchWithProgress(projectUrl)
                         .then(async r => {
-                            if (this.props.vm.runtime.renderer.setPrivateSkinAccess)
+                            if (this.props.vm.runtime.renderer?.setPrivateSkinAccess)
                                 this.props.vm.runtime.renderer.setPrivateSkinAccess(false);
                             if (!r.ok) {
                                 throw new Error(`Request returned status ${r.status}`);
