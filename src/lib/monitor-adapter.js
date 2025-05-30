@@ -48,6 +48,8 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
         value = value.toString();
     }
 
+    console.log(value);
+    
     // Lists can contain booleans, which should also be turned to strings
     if (Array.isArray(value)) {
         value = value.slice();
@@ -59,9 +61,9 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
             if (typeof item === 'object') {
                 // check if this is a pure object or custom display
                 if (
-                    value.constructor?.name === "Object" || value.constructor?.name === "Array"
+                    item.constructor?.name === "Object" || item.constructor?.name === "Array"
                 ) {
-                    value = JSON.stringify(value, circularReplacer);
+                    value[i] = JSON.stringify(item, circularReplacer);
                 } else if (typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
                     value[i].isHTML = true;
                 }
