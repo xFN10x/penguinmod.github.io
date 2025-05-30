@@ -47,8 +47,6 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
     if (typeof value === 'boolean') {
         value = value.toString();
     }
-
-    console.log(value);
     
     // Lists can contain booleans, which should also be turned to strings
     if (Array.isArray(value)) {
@@ -63,7 +61,7 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
                 if (typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
                     value[i].isHTML = true;
                 } else {
-                    value[i] = JSON.stringify(item, circularReplacer);
+                    value[i] = JSON.stringify(item, circularReplacer());
                 }
             }
         }
@@ -76,8 +74,9 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
             value = value.toMonitorContent
               ? value.toMonitorContent() : value.toReporterContent();
             isHTML = true;
-        } else {
-            value = JSON.stringify(value, circularReplacer);
+        } else if (!Array.isArray(value)) {
+            // only applies to objects
+            value = JSON.stringify(value, circularReplacer());
         }
     }
 
