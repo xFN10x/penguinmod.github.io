@@ -147,6 +147,7 @@ import sharkpoolMBPIcon from './penguinmod/extensions/myBlocksPlus.svg';
 import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
 import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
+import sharkpoolLooksExpandedIcon from './penguinmod/extensions/looksExpanded.svg';
 
 // events
 import jgStorageExtensionIcon from './penguinmod/extensions/storage.png';
@@ -388,7 +389,7 @@ const menuItems = [
     {
         name: 'Looks Expanded',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Looks-Expanded.js',
-        iconURL: 'https://sharkpools-extensions.vercel.app/extension-thumbs/Looks-Expanded.svg',
+        iconURL: sharkpoolLooksExpandedIcon,
         tags: ['penguinmod', 'categoryexpansion', 'graphics'],
         description: 'Expansion of the Looks Category.',
         extDeveloper: 'SharkPool, CST1229',
