@@ -5,6 +5,7 @@ import _find_bar from "../addons/find-bar/_manifest_entry.js";
 import _middle_click_popup from "../addons/middle-click-popup/_manifest_entry.js";
 import _editor_block_chomping from "../addons/editor-block-chomping/_manifest_entry.js";
 import _paint_gradient_maker from "../addons/paint-gradient-maker/_manifest_entry.js";
+import _paint_rounded_rect_seperate from "../addons/paint-rounded-rect-seperate/_manifest_entry.js";
 import _jump_to_def from "../addons/jump-to-def/_manifest_entry.js";
 import _editor_searchable_dropdowns from "../addons/editor-searchable-dropdowns/_manifest_entry.js";
 import _block_palette_icons from "../addons/block-palette-icons/_manifest_entry.js";
@@ -76,6 +77,7 @@ export default {
   "middle-click-popup": _middle_click_popup,
   "editor-block-chomping": _editor_block_chomping,
   "paint-gradient-maker": _paint_gradient_maker,
+  "paint-rounded-rect-seperate": _paint_rounded_rect_seperate,
   "jump-to-def": _jump_to_def,
   "editor-searchable-dropdowns": _editor_searchable_dropdowns,
   "block-palette-icons": _block_palette_icons,
