@@ -640,6 +640,25 @@ const pmExtensionDevelopers = [
     'AshimeeAlt'
 ].map(fromHardcodedGithub);
 
+const pmCodeUsedFrom = [
+    {
+        text: "Gandi-IDE",
+        image: `https://github.com/Gandi-IDE.png`,
+        href: `https://github.com/Gandi-IDE/`,
+    },
+    {
+        text: "TurboWarp",
+        image: `https://github.com/TurboWarp.png`,
+        href: `https://github.com/TurboWarp/`,
+    },
+    {
+        text: "scratchfoundation",
+        image: `https://github.com/scratchfoundation.png`,
+        href: `https://github.com/scratchfoundation/`,
+    },
+    // TODO: There are 1000% more projects we've used some stuff from but I don't remember
+];
+
 export default {
     addonDevelopers: shuffle(addonDevelopers),
     pmDevelopers: shuffle(pmDevelopers),
@@ -649,5 +668,6 @@ export default {
     pmTranslators: shuffle(pmTranslators),
     pmSoundSubmittors: shuffle(pmSoundSubmittors),
     pmCostumeSubmittors: shuffle(pmCostumeSubmittors),
-    pmPullRequestDevelopers: shuffle(pmPullRequestDevelopers)
+    pmPullRequestDevelopers: shuffle(pmPullRequestDevelopers),
+    pmCodeUsedFrom: shuffle(pmCodeUsedFrom),
 };

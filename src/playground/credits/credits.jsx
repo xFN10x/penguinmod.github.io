@@ -84,6 +84,12 @@ const Credits = () => (
             <p>There are even community members who have helped develop PenguinMod. People like <i>you!</i></p>
             <UserList users={UserData.pmPullRequestDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>
+                We've also included work from other open-source projects inside of PenguinMod.
+                Here's a list of some other projects you should check out:
+            </p>
+            <UserList users={UserData.pmCodeUsedFrom} />
+            <p><i>The list order is randomized on each refresh.</i></p>
         </section>
         <section>
             <h2>GitHub Pages</h2>
@@ -193,12 +199,11 @@ const Credits = () => (
         <section>
             <h2>Addons</h2>
             <p>
-                Addons are mostly taken from <a href="https://scratchaddons.com/">Scratch Addons</a>,
-                but we hope to have some PenguinMod addons in the future.
-                Here are the developers that made the current addons available.
+                Here are the developers that made the addons from <a href="https://scratchaddons.com/">Scratch Addons</a> available.
             </p>
             <UserList users={UserData.addonDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>PenguinMod-exclusive addons are created by the contributors listed in the Contributors section.</p>
         </section>
         <section>
             <h1>TurboWarp</h1>
