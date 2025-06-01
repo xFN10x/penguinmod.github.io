@@ -416,7 +416,7 @@ const pmCostumeSubmittors = [
     {
         text: 'G1nX',
         image: `https://trampoline.turbowarp.org/avatars/by-username/G1nX`,
-        href: "https://penguinmod.com/profile?user=G1nX",
+        href: `https://scratch.mit.edu/users/G1nX/`,
     },
     // unknown
     {
@@ -550,7 +550,7 @@ const pmSoundSubmittors = [
     {
         text: 'G1nX',
         image: `https://trampoline.turbowarp.org/avatars/by-username/G1nX`,
-        href: "https://penguinmod.com/profile?user=G1nX",
+        href: `https://scratch.mit.edu/users/G1nX/`,
     },
     // unknown
     {
