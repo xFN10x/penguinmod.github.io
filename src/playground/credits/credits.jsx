@@ -74,10 +74,6 @@ const Credits = () => (
             <a href="https://github.com/sponsors/GarboMuffin">
                 Donate to support TurboWarp.
             </a>
-            <br></br><br></br>
-            <a href="https://penguinmod.com/donate/">
-                Donate to support PenguinMod.
-            </a>
             <h2>Contributors</h2>
             <p>
                 PenguinMod is made by a small bunch of developers.
@@ -105,6 +101,15 @@ const Credits = () => (
                     height="160"
                 />
             </a>
+            <h2>Domain Provider</h2>
+            <p>
+                <a href="https://penguinmod.com">penguinmod.com</a> (and any subdomains) are currently
+                provided by <a href="https://github.com/enderhacker">enderhacker</a>.
+                <br></br>
+                <a href="https://github.com/enderhacker">
+                    <img src="https://avatars.githubusercontent.com/u/61245488?v=4" style={{ width: "128px" }}></img>
+                </a>
+            </p>
             <h2>Server Host</h2>
             <p>
                 PenguinMod's Project Sharing server is currently hosted by <a href="https://github.com/ianyourgod">ianyourgod</a>.
