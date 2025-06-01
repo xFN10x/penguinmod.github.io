@@ -80,7 +80,8 @@ const newAddons = [
     "paint-gradient-maker",
     "toolbox-full-blocks-on-hover",
     "waveform-chunk-size",
-    "paint-rounded-rect-seperate"
+    "paint-rounded-rect-seperate",
+    "paint-default-smoothing"
 ];
 
 // eslint-disable-next-line import/no-commonjs
