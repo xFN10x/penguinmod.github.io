@@ -175,8 +175,7 @@ const Credits = () => (
             <p>
                 We use some MIT licensed extensions from TurboWarp as they are really useful!
                 Check out the full list of TurboWarp extensions <a href="https://extensions.turbowarp.org/">here</a>,
-                but we still need to credit these people!
-                Check them out below:
+                and see individual contributors below:
             </p>
             <UserList users={UserData.extensionDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
@@ -261,7 +260,7 @@ const Credits = () => (
                 PenguinMod is also (very very slowly) getting translated into other languages, in the future
                 hopefully the same number of languages can be supported. It'll take a while until we get there though.
             </p>
-            <p>Contributors:</p>
+            <p>Here is the current list of PenguinMod Translators:</p>
             <UserList users={UserData.pmTranslators} />
             <p><i>The list order is randomized on each refresh.</i></p>
         </section>
