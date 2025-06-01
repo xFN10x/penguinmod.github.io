@@ -153,22 +153,13 @@ const Credits = () => (
             <p><i>The list order is randomized on each refresh.</i></p>
             <h2>Accounts</h2>
             <p>
-                Login is managed
-                by <a href="https://auth.itinerary.eu.org/">Scratch Auth</a> created
-                by <a href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
-                (thanks for adding us to the user list!)
+                Scratch login on PenguinMod is managed with <a href="https://oauth2.scratch-wiki.info/">ScratchOAuth2</a>,
+                see their <a href="https://github.com/ScratchVerifier/ScratchOAuth2">GitHub repository</a>.
                 <br />
                 <br />
                 <i>
-                    "Scratch Auth" is not actually affiliated with Scratch,
+                    "ScratchOAuth2" is not actually affiliated with Scratch,
                     the Scratch Team, or the Scratch Foundation.
-                </i>
-                <br />
-                <br />
-                <i>
-                    PenguinMod is also not owned or managed by Looky1173, please only comment on his profile
-                    <br />
-                    if the Scratch Auth page tells you that it failed, not if PenguinMod fails to load.
                 </i>
             </p>
         </section>
@@ -195,6 +186,17 @@ const Credits = () => (
             </p>
             <UserList users={UserData.pmExtensionDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>
+                The Scratch Auth extension has a login system managed with <a href="https://auth.itinerary.eu.org/">Scratch Auth</a>,
+                created by <a href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
+                (thanks for adding us to the user list!)
+                <br />
+                <br />
+                <i>
+                    "Scratch Auth" is not actually affiliated with Scratch,
+                    the Scratch Team, or the Scratch Foundation.
+                </i>
+            </p>
         </section>
         <section>
             <h2>Addons</h2>
