@@ -192,6 +192,11 @@ const pmPullRequestDevelopers = [ // these people made a PR that got merged, or 
         image: `https://github.com/DogeisCut.png`,
         href: `https://github.com/Dogeiscut/`,
     },
+    {
+        text: 'BiglyDerv',
+        image: `https://github.com/biglyderv.png`,
+        href: `https://github.com/biglyderv/`,
+    }
     // list could be missing some people, but theres not really a way to tell
 ];
 
