@@ -90,6 +90,9 @@ const Credits = () => (
             </p>
             <UserList users={UserData.pmCodeUsedFrom} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <ul>
+                <li>Code for "Center" option in Costume editor is from <a href="https://github.com/Nitro-Bolt/scratch-paint/blob/develop/src/containers/mode-tools.jsx#L203-L216">Cubester@Nitro-Bolt</a></li>
+            </ul>
         </section>
         <section>
             <h2>GitHub Pages</h2>

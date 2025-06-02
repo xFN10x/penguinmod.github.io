@@ -663,6 +663,11 @@ const pmCodeUsedFrom = [
         image: `https://github.com/scratchfoundation.png`,
         href: `https://github.com/scratchfoundation/`,
     },
+    {
+        text: "Nitro-Bolt",
+        image: `https://github.com/Nitro-Bolt.png`,
+        href: `https://github.com/Nitro-Bolt/`,
+    },
     // TODO: There are 1000% more projects we've used some stuff from but I don't remember
 ];
 
