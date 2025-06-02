@@ -68,6 +68,7 @@ import jgJSONExtensionIcon from './penguinmod/extensions/json.png';
 import jgTailgatingExtensionIcon from './penguinmod/extensions/tailgating.png';
 import jgRuntimeExtensionIcon from './penguinmod/extensions/runtime.svg';
 import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
+import jgDebuggingIcon from './penguinmod/extensions/debugging.svg';
 
 import jwProtoExtensionIcon from './penguinmod/extensions/proto.svg';
 import jwUniteExtensionIcon from './penguinmod/extensions/Unite.png';
@@ -1356,7 +1357,7 @@ if (IsLocal || IsLiveTests) {
         {
             name: 'Debugging',
             extensionId: 'jgDebugging',
-            iconURL: defaultExtensionIcon,
+            iconURL: jgDebuggingIcon,
             tags: ['penguinmod'],
             description: 'Log information and run commands. Good for debugging packaged projects or just easily changing things.',
             featured: true
@@ -1466,7 +1467,7 @@ if (IsLocal || IsLiveTests) {
             description: 'In development. Do extra things in packaged applications that you can\'t do in the website!',
             featured: true
         },
-        
+
         {
             name: 'Inline Blocks',
             extensionId: 'pmInlineBlocks',
