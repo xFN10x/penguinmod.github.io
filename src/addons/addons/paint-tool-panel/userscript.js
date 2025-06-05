@@ -583,11 +583,24 @@ export default async function () {
             // check if button exists
             let panelBtn = editorRow.querySelector(`div[id="${panelID}"]`);
             if (!panelBtn) {
-                const groupTool = editorRow.querySelector(`div[class^="fixed-tools_mod-dashed-border_"][class*="input-group_input-group_"]`);
-                panelBtn = groupTool.cloneNode(true);
+                let groupTool = editorRow.querySelectorAll(`div[class*="input-group_input-group_"]`);
+                groupTool = groupTool[2] ?? groupTool[1];
+
+                panelBtn = document.createElement("div");
+                panelBtn.setAttribute("style", `border-right: 1px dashed var(--paint-ui-pane-border, #D9D9D9); margin-right: calc(2 * .25rem); display: inline-block; padding: .25rem .325rem; min-width: 3rem; text-align: center;`);
                 panelBtn.id = panelID;
-                panelBtn.children[0].children[1].textContent = "Tools";
-                panelBtn.children[1].remove();
+
+                const container = document.createElement("span");
+                const img = document.createElement("img");
+                img.setAttribute("draggable", false);
+                img.setAttribute("style", `width: 1.5rem; vertical-align: middle;`);
+
+                const label = document.createElement("span");
+                label.setAttribute("style", `display: block; margin-top: .125rem; font-size: .625rem;`);
+                label.textContent = "Tools";
+
+                container.append(img, label);
+                panelBtn.appendChild(container);
                 groupTool.insertAdjacentElement("afterend", panelBtn);
 
                 panelBtn.children[0].addEventListener("click", (e) => {
