@@ -81,7 +81,8 @@ const newAddons = [
     "toolbox-full-blocks-on-hover",
     "waveform-chunk-size",
     "paint-rounded-rect-seperate",
-    "paint-default-smoothing"
+    "paint-default-smoothing",
+    "paint-tool-panel"
 ];
 
 // eslint-disable-next-line import/no-commonjs
