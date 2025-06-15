@@ -18,6 +18,12 @@ const showOpenFilePicker = async () => {
         multiple: false,
         types: [
             {
+                description: 'Supported Files',
+                accept: {
+                    'application/x.scratch.sb3': ['.pmp', '.pm','.sb3', '.sb2', '.sb']
+                }
+            },
+            {
                 description: 'PenguinMod Project',
                 accept: {
                     'application/x.scratch.sb3': ['.pmp', '.pm']
